@@ -1,6 +1,11 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default clerkMiddleware();
+export default clerkMiddleware({
+  authorizedParties: [
+    'http://localhost:3000', // dùng cho local dev
+    // 'https://your-production-domain.com', // uncomment và sửa khi deploy production
+  ],
+});
 
 export const config = {
   matcher: [
