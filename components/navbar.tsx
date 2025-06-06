@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { UserButton } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 import { MainNav } from "@/components/main-nav";
 import StoreSwitcher from "@/components/store-switcher";
 import prismadb from "@/lib/prismadb";
@@ -7,7 +8,7 @@ import prismadb from "@/lib/prismadb";
 const Navbar = async () => {
   const { userId } = await auth();
   if (!userId) {
-    return "/sign-in";
+    redirect("/sign-in");
   }
   const stores = await prismadb.store.findMany({
     where: {
